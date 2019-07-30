@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: org.koin:koin-androidx-scope:2.0.1@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c631e67d593308bda096fd989d82b86e/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c631e67d593308bda096fd989d82b86e/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/56b24e108fbc37a9dfbf3602bf1e0c67/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/56b24e108fbc37a9dfbf3602bf1e0c67/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

@@ -1,0 +1,154 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion build_versions.target_sdk
+    buildToolsVersion build_versions.build_tools
+
+    defaultConfig {
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
+
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    kapt {
+        generateStubs = true
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDir 'libs'
+        }
+    }
+
+    androidExtensions {
+        experimental = true
+    }
+
+    packagingOptions {
+        exclude 'LICENSE.txt'
+        exclude 'LICENSE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/rxjava.properties'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lintOptions {
+        abortOnError false
+        disable 'GoogleAppIndexingWarning'
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    // Support Libraries
+    api deps.support.app_compat
+    api deps.support.v4
+    api deps.support.design
+    api deps.support.recyclerview
+    api deps.constraint_layout
+
+    // Architecture components
+    api deps.lifecycle.runtime
+    api deps.lifecycle.extensions
+    api deps.room.runtime
+    api deps.room.rxjava2
+    api deps.paging_ktx
+
+    // Compiler
+    kapt deps.lifecycle.compiler
+    kapt deps.room.compiler
+
+    // RxJava
+    api deps.rx_android
+    api deps.rxjava2
+
+    // Kotlin
+    api deps.kotlin.stdlib
+
+    // Koin
+    api deps.koin.core
+    api deps.koin.android
+    api deps.koin.architecture
+
+    // Retrofit
+    api deps.retrofit.runtime
+    api deps.retrofit.rx_adapter
+    api deps.retrofit.gson
+
+    // OkHttp
+    api deps.okhttp_logging_interceptor
+
+    //Joda
+    api deps.joda
+
+    //Material dialogs
+    api deps.dialogs.core
+    api deps.dialogs.datetime
+
+//    // Dependencies for local unit tests
+//    testImplementation deps.junit
+//    testImplementation deps.mockito.all
+//    testImplementation deps.hamcrest
+//    testImplementation deps.kotlin.stdlib
+//    testImplementation deps.kotlin.test
+//    testImplementation deps.koin.test, { exclude group: 'org.mockito' }
+//
+//    // Android Testing Support Library's runner and rules
+//    androidTestImplementation deps.axt.runner
+//    androidTestImplementation deps.axt.rules
+//
+//    // Dependencies for Android unit tests
+//    androidTestImplementation deps.junit
+//    androidTestImplementation deps.mockito.core, { exclude group: 'net.bytebuddy' }
+//
+//    // Espresso UI Testing
+//    androidTestImplementation deps.espresso.core
+//    androidTestImplementation deps.espresso.contrib
+//    androidTestImplementation deps.espresso.intents
+//
+//    // Resolve conflicts between main and test APK:
+//    androidTestImplementation deps.support.annotations
+//    androidTestImplementation deps.support.v4
+//    androidTestImplementation deps.support.app_compat
+//    androidTestImplementation deps.support.design
+//    api 'androidx.palette:palette-ktx:1.0.0'
+//    api 'androidx.preference:preference:1.1.0-rc01'
+
+}
